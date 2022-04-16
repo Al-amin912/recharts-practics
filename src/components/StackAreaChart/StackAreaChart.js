@@ -1,16 +1,13 @@
 
-import './App.css';
+import React from "react";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
-  Legend
+  Tooltip
 } from "recharts";
-
-import StackAreaChart from './components/StackAreaChart/StackAreaChart';
 
 const data = [
   {
@@ -57,36 +54,46 @@ const data = [
   }
 ];
 
-function App() {
+export default function StackAreaChart() {
   return (
-    <div>
-    <LineChart
+      <>
+    <AreaChart
       width={500}
-      height={300}
+      height={400}
       data={data}
       margin={{
-        top: 5,
+        top: 10,
         right: 30,
-        left: 20,
-        bottom: 5
+        left: 0,
+        bottom: 0
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Legend />
-      <Line
+      <Area
+        type="monotone"
+        dataKey="uv"
+        stackId="1"
+        stroke="#8884d8"
+        fill="#8884d8"
+      />
+      <Area
         type="monotone"
         dataKey="pv"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
+        stackId="1"
+        stroke="#82ca9d"
+        fill="#82ca9d"
       />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-    </LineChart>
-    <StackAreaChart></StackAreaChart>
-    </div>
+      <Area
+        type="monotone"
+        dataKey="amt"
+        stackId="1"
+        stroke="#ffc658"
+        fill="#ffc658"
+      />
+    </AreaChart>
+    </>
   );
 }
-
-export default App;
